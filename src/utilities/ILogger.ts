@@ -1,16 +1,15 @@
 export interface ILogger {
-    info(message: string): void;
-    error(message: string): void;
+  info(message: string): void;
+  error(message: string): void;
 }
-  
+
 export enum LogLevel {
-    INFO,
-    ERROR,
+  INFO,
+  ERROR,
 }
-  
+
 export interface ILogEntry {
-    level: LogLevel;
-    message: string;
-    timestamp: string;
+  level: LogLevel;
+  message: string;
+  timestamp: string;
 }
-  

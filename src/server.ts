@@ -1,8 +1,11 @@
 import app from "./app";
-import logger from "./utilities/Logger";
+import { initDB } from "./database/db-connection";
+import logger from "./utilities/logger";
 
 const port = process.env.API_PORT || 3000;
 
-app.listen(port,()=>{
-    logger.info(`Server Started on ${port}`)
-})
+initDB().catch((error) => logger.error(`bootstrapping failed ${error}`));
+
+app.listen(port, () => {
+  logger.info(`Server Started on ${port}`);
+});

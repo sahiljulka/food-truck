@@ -19,8 +19,14 @@ const corsConfiguration = {
   },
 };
 
+app.use(express.static(__dirname + "/dist"));
 app.use(cors(corsConfiguration));
 app.use(bodyParser.json());
+
+app.get("/", function (req, res) {
+  console.log(__dirname);
+  res.sendFile(__dirname + "index.html");
+});
 
 app.use("/api/v1/foodtruck", foodRoute);
 

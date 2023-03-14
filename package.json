@@ -11,7 +11,9 @@
     "database:setup": "sequelize db:drop; sequelize db:create;database:migrate",
     "database:migrate": "sequelize db:migrate",
     "migration:generate": "sequelize migration:generate --name",
-    "prod": "rm -rf ./build/* && tsc -p ./tsconfig.prod.json && node ./build/server.js"
+    "prod": "rm -rf ./build/* && tsc -p ./tsconfig.prod.json && node ./build/server.js",
+    "build-ui": "cd ./food_truck_UI && ng build",
+    "run-ui-backend":"npm run build-ui && npm run dev"
   },
   "keywords": [],
   "author": "",

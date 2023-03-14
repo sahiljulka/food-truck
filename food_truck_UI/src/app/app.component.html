@@ -1,0 +1,11 @@
+<nav class="navbar navbar-dark bg-primary mb-5 p-4">
+  <a class="navbar-brand m-auto" href="#">Food Truck Listing</a>
+</nav>
+<div class="h-100 d-flex flex-row align-items-center">
+  <div class="h-100 p-3 w-50">
+    <app-calendar (onDateChanged)="dateChanged($event)" ></app-calendar>
+  </div>
+  <div class="h-100 p-3 w-50">
+    <app-foodtruck [selectedDate]="selectedDate"></app-foodtruck>
+  </div>
+</div>

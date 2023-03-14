@@ -7,7 +7,11 @@ export const sequelize = new Sequelize(
   dbConfig.database,
   dbConfig.username,
   dbConfig.password,
-  { host: dbConfig.host, dialect: "postgres" }
+  {
+    host: dbConfig.host,
+    dialect: "postgres",
+    port: Number.parseInt(dbConfig.port),
+  }
 );
 
 const entityPath = path.resolve(__dirname, "../entities");

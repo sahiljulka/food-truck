@@ -1,0 +1,41 @@
+<div class="position-relative h-100">
+  <div class="d-flex flex-column h-75">
+    <h3 class="text-center">{{ viewDate | calendarDate:(CalendarView.Day + 'ViewTitle'):'en' }}</h3>
+
+    <div *ngIf="true" class="d-flex flex-row mt-5">
+      <input #newFoodTruckField class="form-control p-3 me-5" id="floatingInput" placeholder="Add FoodTruck"
+        [(ngModel)]="newFoodTruck">
+      <button [disabled]="newFoodTruckField.value===''" type="button" class="btn btn-primary btn-lg"
+        (click)="createFoodTruck(newFoodTruckField.value);newFoodTruckField.value=''">Add</button>
+    </div>
+
+    <div class="card mt-4 overflow-hidden">
+      <div class="card-header">
+        Food Trucks
+      </div>
+      <div class="overflow-scroll">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let foodTruck of foodTrucks" class="list-group-item d-flex flex-row align-items-center">
+            <input #inputField [disabled]="true" class="form-control flex-grow-1" [value]="foodTruck.name">
+            <i *ngIf="inputField.disabled" role="button" class='fas fa-pencil-alt ms-3'
+              (click)="inputField.disabled = !inputField.disabled"></i>
+            <i *ngIf="!inputField.disabled" class='fa fa-check disabled ms-3' aria-hidden="true"
+              (click)="inputField.disabled = !inputField.disabled;modifyFoodtruck(foodTruck,inputField.value)"></i>
+            <i role="button" class='fas fa-trash-alt ms-3' (click)="deleteFoodtruck(foodTruck.id)"></i>
+          </li>
+          <div class="card-body" *ngIf="foodTrucks.length==0">No Food Trucks added for this date</div>
+        </ul>
+      </div>
+      <ng-container *ngTemplateOutlet="loader"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <div *ngIf="isLoading" style="z-index: 1000; opacity: 0.5; cursor: default;"
+    class="pe-none loader-container position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-white">
+    <div class="spinner-border" style="width: 6rem; height: 6rem;">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>

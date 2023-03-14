@@ -1,11 +1,13 @@
 import {
-  AfterContentInit,
-  Component, EventEmitter, OnInit, Output, ViewEncapsulation
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
-  CalendarEvent,
   CalendarView,
-  CalendarMonthViewBeforeRenderEvent
+  CalendarMonthViewBeforeRenderEvent,
 } from 'angular-calendar';
 import { format } from 'date-fns';
 
@@ -16,7 +18,7 @@ import { format } from 'date-fns';
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent implements OnInit {
-  @Output() onDateChanged= new EventEmitter<string>();
+  @Output() onDateChanged = new EventEmitter<string>();
 
   view: CalendarView = CalendarView.Month;
 
@@ -24,21 +26,19 @@ export class CalendarComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  constructor() {}
-
   ngOnInit(): void {
-    this.onDateChanged.emit(format((this.viewDate), "yyyy-MM-dd"));
+    this.onDateChanged.emit(format(this.viewDate, 'yyyy-MM-dd'));
   }
 
-  dayClicked( date: Date ): void {
-      this.viewDate = date;
-      this.onDateChanged.emit(format((this.viewDate), "yyyy-MM-dd"));
+  dayClicked(date: Date): void {
+    this.viewDate = date;
+    this.onDateChanged.emit(format(this.viewDate, 'yyyy-MM-dd'));
   }
 
   beforeViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
     renderEvent.body.forEach((day) => {
-        if(format((day.date), "yyyy-MM-dd")==format((this.viewDate), "yyyy-MM-dd"))
-          day.cssClass = 'bg-grey';
+      if (format(day.date, 'yyyy-MM-dd') == format(this.viewDate, 'yyyy-MM-dd'))
+        day.cssClass = 'bg-grey';
     });
   }
 }

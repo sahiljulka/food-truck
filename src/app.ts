@@ -24,7 +24,6 @@ app.use(cors(corsConfiguration));
 app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
-  console.log(__dirname);
   res.sendFile(__dirname + "index.html");
 });
 

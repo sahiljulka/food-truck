@@ -1,5 +1,5 @@
 export default interface FoodTruck {
-  id:number;
+  id: number;
   name: string;
   date?: string;
 }

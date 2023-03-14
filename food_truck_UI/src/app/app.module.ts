@@ -13,22 +13,21 @@ import { FormsModule } from '@angular/forms';
 import { GlobalErrorHandler } from './global-error-handler.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CalendarComponent,
-    FoodtruckComponent
-  ],
+  declarations: [AppComponent, CalendarComponent, FoodtruckComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     FoodtruckService,
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

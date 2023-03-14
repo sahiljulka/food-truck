@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/jest",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "lint": "npx eslint . --ext .ts 'src/'",
+    "lint": "npx eslint . --ext .ts 'src/' 'food_truck_UI'",
     "lint:fix": "npx eslint . --ext .ts --fix",
     "database:setup": "sequelize db:drop; sequelize db:create;database:migrate",
     "database:migrate": "sequelize db:migrate",

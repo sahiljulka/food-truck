@@ -5,6 +5,7 @@ module.exports = {
     "<rootDir>/src/server.ts",
     "<rootDir>/src/migrations/*",
     "<rootDir>/src/database/*",
+    "<rootDir>/src/dist/*",
   ],
   coverageDirectory: "coverage",
   coverageThreshold: {

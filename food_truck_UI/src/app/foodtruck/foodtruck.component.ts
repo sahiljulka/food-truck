@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { finalize } from 'rxjs';
+import { catchError, finalize } from 'rxjs';
 import FoodTruck from '../models/foodtruck';
 import { CalendarView } from 'angular-calendar';
 import { FoodtruckService } from '../services/foodtruck.service';
@@ -46,27 +46,50 @@ export class FoodtruckComponent implements OnChanges {
   }
 
   createFoodTruck(foodTruckName: string) {
+    this.isLoading = true;
     this._foodtruckService
       .addFoodTruck({
         name: foodTruckName,
         date: this.selectedDate,
       } as FoodTruck)
+      .pipe(
+        catchError((err)=>{
+          this.isLoading = false;
+          throw err;
+        })
+      )
       .subscribe(() => {
         this.getFoodTrucks();
       });
   }
 
   modifyFoodtruck(foodTruck: FoodTruck, foodTruckName: string) {
+    this.isLoading = true;
     if (foodTruck.name != foodTruckName)
       this._foodtruckService
         .modifyFoodTruck({ name: foodTruckName, id: foodTruck.id })
-        .subscribe(() => {
-          this.getFoodTrucks();
-        });
+        .pipe(
+          catchError((err)=>{
+            this.isLoading = false;
+            throw err;
+          }),
+          finalize(()=>{
+            this.getFoodTrucks();
+          })
+        )
+        .subscribe();
   }
 
   deleteFoodtruck(id: number) {
-    this._foodtruckService.deleteFoodTruck(id).subscribe(() => {
+    this.isLoading = true;
+    this._foodtruckService.deleteFoodTruck(id)
+    .pipe(
+      catchError((err)=>{
+        this.isLoading = false;
+        throw err;
+      })
+    )
+    .subscribe(() => {
       this.getFoodTrucks();
     });
   }

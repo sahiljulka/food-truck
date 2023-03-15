@@ -8,12 +8,14 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint": "npx eslint . --ext .ts 'src/' 'food_truck_UI'",
     "lint:fix": "npx eslint . --ext .ts --fix",
-    "database:setup": "sequelize db:drop; sequelize db:create;database:migrate",
+    "database:setup": "sequelize db:drop; sequelize db:create;npm run database:migrate",
     "database:migrate": "sequelize db:migrate",
     "migration:generate": "sequelize migration:generate --name",
     "prod": "rm -rf ./build/* && tsc -p ./tsconfig.prod.json && node ./build/server.js",
     "build-ui": "cd ./food_truck_UI && ng build",
-    "run-ui-backend": "npm run build-ui && npm run dev"
+    "serve-ui": "cd ./food_truck_UI && ng serve && npm run dev",
+    "run-ui-backend": "npm run build-ui && npm run dev",
+    "run-ui-backend:local": "npm run serve-ui && npm run dev"
   },
   "keywords": [],
   "author": "",
